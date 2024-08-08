@@ -2,16 +2,14 @@ import string
 import random
 
 class GeneratePassword():
-    def __init__(self, length) -> None:
-        if length <= 0:
-            raise ValueError("Less than or equal to 0.")
-        elif type(length) != int:
-            raise TypeError("Not a number.")
-        self.lengt = length
+    def __init__(self) -> None:
+        self.length = 12
     
-    def generate(self) -> str:
+    def generate(self, output_text) -> None:
+        output_text.configure(state="normal")
         symbols = string.ascii_letters + string.hexdigits + string.punctuation
         password = ""
-        for _ in range(self.lengt):
+        for _ in range(self.length):
             password += random.choice(symbols)
-        return password
+        output_text.insert(index="1.0 ",text=f'{password}\n')
+        output_text.configure(state="disabled")
